@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/" onclick="route()">Home</a>
+        <a href="/about" onclick="route()">About</a>
+    </nav>
+
+    <main id="app"></main>
+
+    <script>
+
+        let home = `
+                      <h1>
+                        Home
+                        </h1>
+                     <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et id molestias sint, debitis libero laboriosam aperiam corrupti quos eaque error ipsam.
+                        </p>`;
+        let about = `
+                         <h1>
+                            About
+                            </h1>
+                         <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et id molestias sint, debitis libero laboriosam aperiam corrupti quos eaque error ipsam. Ex tempora vel magni sequi dignissimos, suscipit odit ducimus repudiandae minima fugiat, autem facilis. Animi id assumenda quaerat ea temporibus quisquam soluta numquam perspiciatis! Nihil dignissimos autem dolorem unde consequuntur quasi sequi dolorum impedit?
+                            </p>
+                         `;
+
+        //                         values to change title
+        const routes = {
+            "/": {
+                title: "Home",
+                render: () => home
+            },
+            "/about": {
+                title: "About",
+                render: () => about
+            }
+        }
+
+        //                     event clicker in a tage Onclick
+        const route = (even) => {
+            even = event;
+            event.preventDefault();
+            window.history.pushState(routes[location.pathname].title, "null", even.target.href);
+            //                             state , "title"= NotWorking , url
+            document.title = even;
+            router()
+        };
+
+
+
+
+
+        //                       router to html and titlr
+        function router() {
+            let view = routes[location.pathname];  // **************** //
+
+            document.title = view.title; //  title change
+            app.innerHTML = view.render();  // renering inner app id
+        };
+
+    </script>
+
+    <style>
+        :root {
+            --primary: #222831;
+            --secondary: #30475e;
+            --secondary-light: #3a5a7a;
+            --accent: #00b4fb;
+            --neutral: #eeeeee;
+
+            font-size: 18px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: "Montserrat";
+        }
+
+        body {
+            color: var(--neutral);
+            padding: 1rem clamp(1.5rem, 6vw, 3rem);
+            background-color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin-right: .75em;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        main {
+            margin: 3rem 0;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: .5rem;
+        }
+
+        p {
+            margin-bottom: 2rem;
+        }
+    </style>
+</body>
+
+</html>
