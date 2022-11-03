@@ -50,7 +50,7 @@
         const route = (even) => {
             even = event;
             even.preventDefault();                                    // make defoult
-            window.history.pushState({}, "null", even.target.href);   // state , "title"= NotWorking , url
+            window.history.pushState({}, null, even.target.href);   // state , "title"= NotWorking , url
             router()
         };
 
